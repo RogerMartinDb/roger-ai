@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import AiChat from '../components/AiChat.vue'
+import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
   <main>
-    <AiChat />
+    <TheWelcome />
   </main>
 </template>
