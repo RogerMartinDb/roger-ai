@@ -8,7 +8,7 @@ const { question } = toRefs(props)
 const answer = ref<string>('')
 
 const init = () => {
-  const url = `/stream?query=${question.value}`
+  const url = `https://ai.bimis.net/stream?query=${question.value}`
   const source = new EventSource(url)
   source.onmessage = (event) => {
     if (event.data === '[DONE]') {
