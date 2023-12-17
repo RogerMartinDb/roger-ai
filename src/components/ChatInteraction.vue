@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, toRefs } from 'vue'
+import {EventSourcePost} from '@/utils/EventSourcePost.ts'
+
 const props = defineProps<{
   question: string
 }>()
@@ -8,8 +10,13 @@ const { question } = toRefs(props)
 const answer = ref<string>('')
 
 const init = () => {
-  const url = `https://ai.bimis.net/stream?query=${question.value}`
-  const source = new EventSource(url)
+  const task = {
+    question: question.value,
+    modelId: '@cf/meta/llama-2-7b-chat-int8'
+  }
+
+  const url = `https://ai.bimis.net/stream`
+  const source = new EventSourcePost(url)
   source.onmessage = (event) => {
     if (event.data === '[DONE]') {
       source.close()
@@ -18,6 +25,7 @@ const init = () => {
     const data = JSON.parse(event.data)
     answer.value += data.response
   }
+  source.post(task)
 }
 
 init()
