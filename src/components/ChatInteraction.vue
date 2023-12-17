@@ -15,7 +15,7 @@ const init = () => {
     modelId: '@cf/meta/llama-2-7b-chat-int8'
   }
 
-  const url = `https://ai.bimis.net/stream`
+  const url = apiUrl()
   const source = new EventSourcePost(url)
   source.onmessage = (event) => {
     if (event.data === '[DONE]') {
@@ -26,6 +26,15 @@ const init = () => {
     answer.value += data.response
   }
   source.post(task)
+}
+
+const apiUrl = () => {
+  if (document.location.hostname === "localhost"){
+    return "https://ai.bimis.net/stream"
+  }
+  else {
+    return "/stream"
+  }
 }
 
 init()
