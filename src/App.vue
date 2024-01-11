@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import MainMessage from './components/MainMessage.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Chat logo" class="logo" src="@/assets/cha-bubbles-two-svgrepo-com.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="Let's play with AI" />
+      <MainMessage />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/">Chat</RouterLink>
+        <RouterLink to="/draw">Draw</RouterLink>
         <RouterLink to="/vue">Vue</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
