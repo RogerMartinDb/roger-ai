@@ -1,31 +1,19 @@
 <script setup lang="ts">
-import { ref, toRefs } from 'vue'
+import { toRefs } from 'vue'
 
 const props = defineProps<{
   prompt: string
 }>()
 
 const { prompt } = toRefs(props)
-const drawing = ref<string>('')
 
-const init = async () => {
-  const task = {
-    prompt: prompt.value
-  }
-
-  fetch(apiUrl(), {
-    body: JSON.stringify(task),
-    method: 'POST'
-  })
-  .then(response => response.text())
-  .then(bodyString => drawing.value = bodyString)
+const apiUrl = (prompt: string) => {
+  const url = new URL(document.location.href)
+  url.pathname = '/image'
+  url.searchParams.set('prompt', prompt)
+  return url
 }
 
-const apiUrl = () => {
-  return '/image'
-}
-
-init()
 </script>
 
 <template>
@@ -36,7 +24,7 @@ init()
     </div>
     <div class="answer">
       <div class="actor">Model</div>
-      <img v-bind:src="drawing" />
+      <img v-bind:src="apiUrl(prompt).toString()" />
     </div>
   </div>
 </template>
