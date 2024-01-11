@@ -8,7 +8,7 @@ const headers = {
   'Access-Control-Allow-Headers': 'content-type'
 }
 
-export async function onRequestOptions(context) {
+export async function onRequestOptions() {
   return new Response(null, { headers })
 }
 
