@@ -1,20 +1,54 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import MainMessage from './components/MainMessage.vue'
+import { ref, type Ref } from 'vue'
+const logo: Ref<HTMLImageElement | null> = ref(null)
+
+const changeLogo = (name: string) => {
+  if (!logo.value) {
+    return
+  }
+
+  let image = 'cha-bubbles-two-svgrepo-com.svg';
+
+  switch (name) {
+    case 'chat':
+      image = 'cha-bubbles-two-svgrepo-com.svg'
+      break
+    case 'draw':
+      image = 'des-palette-svgrepo-com.svg'
+      break
+    case 'translate':
+      image = 'cha-translate-2-svgrepo-com.svg'
+      break
+    case 'about':
+      image = 'clo-bowler-svgrepo-com.svg'
+      break
+  }
+
+  logo.value.src = logo.value.src.replace(/\/assets\/.*.svg/, `/assets/${image}`)
+}
 </script>
 
 <template>
   <header>
-    <img alt="Chat logo" class="logo" src="@/assets/cha-bubbles-two-svgrepo-com.svg" width="125" height="125" />
+    <img
+      alt="Chat logo"
+      ref="logo"
+      id="logo"
+      src="@/assets/cha-bubbles-two-svgrepo-com.svg"
+      width="125"
+      height="125"
+    />
 
     <div class="wrapper">
       <MainMessage />
 
       <nav>
-        <RouterLink to="/">Chat</RouterLink>
-        <RouterLink to="/draw">Draw</RouterLink>
-        <RouterLink to="/vue">Vue</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/" @click="changeLogo('chat')">Chat</RouterLink>
+        <RouterLink to="/draw" @click="changeLogo('draw')">Draw</RouterLink>
+        <RouterLink to="/vue" @click="changeLogo('translate')">Translate</RouterLink>
+        <RouterLink to="/about" @click="changeLogo('about')">About</RouterLink>
       </nav>
     </div>
   </header>
