@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { toRefs } from 'vue'
+import VueLoadImage from 'vue-load-image'
 
 const props = defineProps<{
   prompt: string
@@ -13,7 +14,6 @@ const imageUrl = (prompt: string) => {
   url.searchParams.set('prompt', prompt)
   return url.toString()
 }
-
 </script>
 
 <template>
@@ -24,7 +24,18 @@ const imageUrl = (prompt: string) => {
     </div>
     <div class="answer">
       <div class="actor">Model</div>
-      <img v-bind:src="imageUrl(prompt)" />
+
+      <div id="imageContainer">
+        <vue-load-image>
+          <template v-slot:image>
+            <img id="image" v-bind:src="imageUrl(prompt)" />
+          </template>
+          <template v-slot:preloader>
+            <img src='@/assets/200.webp' />
+          </template>
+          <template v-slot:error>Failed to generate image, please try again</template>
+        </vue-load-image>
+      </div>
     </div>
   </div>
 </template>
@@ -43,5 +54,13 @@ const imageUrl = (prompt: string) => {
 }
 .answer {
   margin-top: 4px;
+}
+
+#imageContainer {
+  width: 100%;
+}
+
+#image {
+  width: 100%;
 }
 </style>
