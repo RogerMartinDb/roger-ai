@@ -11,5 +11,5 @@ const questions = ref<string[]>([])
     <ChatInteraction :question="question" />
   </div>
 
-  <AskQuestion @new-question="(q) => questions.push(q)" />
+  <AskQuestion placeholder="Ask the AI anything" @new-question="(q) => questions.push(q)" />
 </template>

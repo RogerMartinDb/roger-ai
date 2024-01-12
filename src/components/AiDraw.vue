@@ -11,5 +11,5 @@ const prompts = ref<string[]>([])
     <DrawInteraction :prompt="prompt" />
   </div>
 
-  <AskQuestion @new-question="(q) => prompts.push(q)" />
+  <AskQuestion placeholder="Tell the AI what you want it to draw" @new-question="(q) => prompts.push(q)" />
 </template>

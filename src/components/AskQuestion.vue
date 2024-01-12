@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const emit = defineEmits<{newQuestion: [value: string]}>()
+import { ref, toRefs } from 'vue'
+const emit = defineEmits<{ newQuestion: [value: string] }>()
+const props = defineProps<{ placeholder: string }>()
+const { placeholder } = toRefs(props)
 
 const theQuestion = ref<string>('')
 const newQuestion = () => {
-  emit("newQuestion", theQuestion.value)
-  theQuestion.value = ""
+  emit('newQuestion', theQuestion.value)
+  theQuestion.value = ''
 }
 
 const askOnCtrlEnter = (event: KeyboardEvent) => {
@@ -22,7 +24,7 @@ const askOnCtrlEnter = (event: KeyboardEvent) => {
         v-model="theQuestion"
         @keydown="askOnCtrlEnter"
         autofocus
-        placeholder="Ask the AI anything"
+        :placeholder="placeholder"
         type="text"
       ></textarea>
       <button type="button" @click="newQuestion">Ask</button>
