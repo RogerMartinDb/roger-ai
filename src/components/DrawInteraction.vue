@@ -7,11 +7,11 @@ const props = defineProps<{
 
 const { prompt } = toRefs(props)
 
-const apiUrl = (prompt: string) => {
+const imageUrl = (prompt: string) => {
   const url = new URL(document.location.href)
   url.pathname = '/image'
   url.searchParams.set('prompt', prompt)
-  return url
+  return url.toString()
 }
 
 </script>
@@ -24,7 +24,7 @@ const apiUrl = (prompt: string) => {
     </div>
     <div class="answer">
       <div class="actor">Model</div>
-      <img v-bind:src="apiUrl(prompt).toString()" />
+      <img v-bind:src="imageUrl(prompt)" />
     </div>
   </div>
 </template>
