@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, toRefs } from 'vue'
+import { onMounted, ref, toRefs, type Ref } from 'vue'
 import {EventSourcePost} from '@/utils/EventSourcePost.ts'
 
 const props = defineProps<{
@@ -38,10 +38,16 @@ const apiUrl = () => {
 }
 
 init()
+
+const me: Ref<HTMLDivElement | null> = ref(null);
+
+onMounted(() => {
+  me.value?.scrollIntoView()
+});
 </script>
 
 <template>
-  <div class="interaction">
+  <div class="interaction" ref="me">
     <div class="question">
       <div class="actor">You</div>
       <div class="questionText">{{ question }}</div>
