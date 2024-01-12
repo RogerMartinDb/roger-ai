@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRefs } from 'vue'
+import { ref, type Ref, toRefs, onMounted } from 'vue'
 import VueLoadImage from 'vue-load-image'
 
 const props = defineProps<{
@@ -14,10 +14,16 @@ const imageUrl = (prompt: string) => {
   url.searchParams.set('prompt', prompt)
   return url.toString()
 }
+
+const me: Ref<HTMLDivElement | null> = ref(null);
+
+onMounted(() => {
+  me.value?.scrollIntoView()
+});
 </script>
 
 <template>
-  <div class="interaction">
+  <div class="interaction" ref="me">
     <div class="question">
       <div class="actor">You</div>
       <div class="questionText">{{ prompt }}</div>
