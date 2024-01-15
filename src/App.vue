@@ -2,53 +2,49 @@
 import { RouterLink, RouterView } from 'vue-router'
 import MainMessage from './components/MainMessage.vue'
 import { ref, type Ref } from 'vue'
-const logo: Ref<HTMLImageElement | null> = ref(null)
 
-const changeLogo = (name: string) => {
-  if (!logo.value) {
-    return
-  }
+import chatImage from '@/assets/cha-bubbles-two-svgrepo-com.svg'
+import drawImage from '@/assets/des-palette-svgrepo-com.svg'
+import translateImage from '@/assets/cha-translate-2-svgrepo-com.svg'
+import aboutImage from '@/assets/clo-bowler-svgrepo-com.svg'
 
-  let image = 'cha-bubbles-two-svgrepo-com.svg';
-
-  switch (name) {
-    case 'chat':
-      image = 'cha-bubbles-two-svgrepo-com.svg'
-      break
-    case 'draw':
-      image = 'des-palette-svgrepo-com.svg'
-      break
-    case 'translate':
-      image = 'cha-translate-2-svgrepo-com.svg'
-      break
-    case 'about':
-      image = 'clo-bowler-svgrepo-com.svg'
-      break
-  }
-
-  logo.value.src = logo.value.src.replace(/\/assets\/.*.svg/, `/assets/${image}`)
+interface PageLogo {
+  name: string
+  display: string
+  image: string
 }
+
+const pageLogos: Ref<PageLogo[]> = ref([
+  { name: 'chat', display: 'Chat', image: chatImage },
+  { name: 'draw', display: 'Draw', image: drawImage },
+  { name: 'translate', display: 'Translate', image: translateImage },
+  { name: 'about', display: 'About', image: aboutImage }
+])
+
+const selectedPage: Ref<string> = ref('chat')
+
 </script>
 
 <template>
   <header>
-    <img
-      alt="Chat logo"
-      ref="logo"
-      id="logo"
-      src="@/assets/cha-bubbles-two-svgrepo-com.svg"
-      width="125"
-      height="125"
-    />
+    <div v-for="(pageLogo, index) in pageLogos" :key="index">
+      <img
+        :alt="pageLogo.display"
+        :src="pageLogo.image"
+        width="125"
+        height="125"
+        v-show="pageLogo.name == selectedPage"
+      />
+    </div>
 
     <div class="wrapper">
       <MainMessage />
 
       <nav>
-        <RouterLink to="/" @click="changeLogo('chat')">Chat</RouterLink>
-        <RouterLink to="/draw" @click="changeLogo('draw')">Draw</RouterLink>
-        <RouterLink to="/vue" @click="changeLogo('translate')">Translate</RouterLink>
-        <RouterLink to="/about" @click="changeLogo('about')">About</RouterLink>
+        <RouterLink to="/" @click="selectedPage = 'chat'">Chat</RouterLink>
+        <RouterLink to="/draw" @click="selectedPage = 'draw'">Draw</RouterLink>
+        <RouterLink to="/vue" @click="selectedPage = 'translate'">Translate</RouterLink>
+        <RouterLink to="/about" @click="selectedPage = 'about'">About</RouterLink>
       </nav>
     </div>
   </header>
