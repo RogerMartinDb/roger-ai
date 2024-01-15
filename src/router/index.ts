@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ChatView from '../views/ChatView.vue'
 import DrawView from '../views/DrawView.vue'
+import TranslateView from '../views/TranslateView.vue'
+import PlaygroundView from '../views/PlaygroundView.vue'
+import AboutView from '../views/AboutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,14 +19,19 @@ const router = createRouter({
       component: DrawView
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
+      path: '/translate',
+      name: 'translate',
+      component: TranslateView
     },
     {
-      path: '/vue',
-      name: 'vue',
-      component: () => import('../views/VueView.vue')
+      path: '/playground',
+      name: 'playground',
+      component: PlaygroundView
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView
     }
   ]
 })

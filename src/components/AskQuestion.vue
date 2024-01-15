@@ -27,7 +27,7 @@ const askOnCtrlEnter = (event: KeyboardEvent) => {
         :placeholder="placeholder"
         type="text"
       ></textarea>
-      <button type="button" @click="newQuestion">Ask</button>
+      <button type="button" @click="newQuestion">⪢</button>
     </form>
   </div>
 </template>
@@ -40,6 +40,10 @@ const askOnCtrlEnter = (event: KeyboardEvent) => {
   width: min(80vw, 600px);
   background-color: rgba(255, 255, 255, 1);
   padding: 20px;
+}
+
+.input-area button {
+  font-size: large;
 }
 
 .main-input {

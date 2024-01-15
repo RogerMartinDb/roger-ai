@@ -2,17 +2,27 @@
 import { onMounted, ref, toRefs, type Ref } from 'vue'
 import {EventSourcePost} from '@/utils/EventSourcePost.ts'
 
+//define new type called ChatSettings that is available in other scripts that import this one
+export type ChatSettings = {
+  systemPrompt: string
+  assistantPrompt: string
+  modelId: string
+}
+
 const props = defineProps<{
   question: string
+  settings: ChatSettings | undefined
 }>()
 
-const { question } = toRefs(props)
+const { question, settings } = toRefs(props)
 const answer = ref<string>('')
 
 const init = () => {
   const task = {
     question: question.value,
-    modelId: '@cf/meta/llama-2-7b-chat-int8'
+    modelId: settings.value?.modelId || '@cf/meta/llama-2-7b-chat-int8',
+    systemPrompt: settings.value?.systemPrompt || 'You are a helpful assistant.',
+    assistantPrompt: settings.value?.assistantPrompt || 'You are a helpful assistant.'
   }
 
   const url = apiUrl()

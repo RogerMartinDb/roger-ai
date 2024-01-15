@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ChatInteraction from './ChatInteraction.vue'
+import TranslateInteraction from './TranslateInteraction.vue'
 import AskQuestion from './AskQuestion.vue'
 import { ref } from 'vue'
 
@@ -8,8 +8,8 @@ const questions = ref<string[]>([])
 
 <template>
   <div v-for="(question, index) in questions" :key="index">
-    <ChatInteraction :question="question" :settings="undefined"/>
+    <TranslateInteraction :question="question" />
   </div>
 
-  <AskQuestion placeholder="Ask the AI anything" @new-question="(q) => questions.push(q)" />
+  <AskQuestion placeholder="Enter text to be translated" @new-question="(q) => questions.push(q)" />
 </template>

@@ -7,6 +7,7 @@ import chatImage from '@/assets/cha-bubbles-two-svgrepo-com.svg'
 import drawImage from '@/assets/des-palette-svgrepo-com.svg'
 import translateImage from '@/assets/cha-translate-2-svgrepo-com.svg'
 import aboutImage from '@/assets/clo-bowler-svgrepo-com.svg'
+import playgroundImage from '@/assets/des-wand-2-svgrepo-com.svg'
 
 interface PageLogo {
   name: string
@@ -18,6 +19,7 @@ const pageLogos: Ref<PageLogo[]> = ref([
   { name: 'chat', display: 'Chat', image: chatImage },
   { name: 'draw', display: 'Draw', image: drawImage },
   { name: 'translate', display: 'Translate', image: translateImage },
+  { name: 'playground', display: 'Playground', image: playgroundImage },
   { name: 'about', display: 'About', image: aboutImage }
 ])
 
@@ -43,7 +45,8 @@ const selectedPage: Ref<string> = ref('chat')
       <nav>
         <RouterLink to="/" @click="selectedPage = 'chat'">Chat</RouterLink>
         <RouterLink to="/draw" @click="selectedPage = 'draw'">Draw</RouterLink>
-        <RouterLink to="/vue" @click="selectedPage = 'translate'">Translate</RouterLink>
+        <RouterLink to="/translate" @click="selectedPage = 'translate'">Translate</RouterLink>
+        <RouterLink to="/playground" @click="selectedPage = 'playground'">Playground</RouterLink>
         <RouterLink to="/about" @click="selectedPage = 'about'">About</RouterLink>
       </nav>
     </div>
