@@ -12,7 +12,8 @@ const init = () => {
   const task = {
     text: question.value,
     from: 'english',
-    to: 'spanish'
+    to: 'spanish',
+    detect: true
   }
 
   const url = apiUrl()

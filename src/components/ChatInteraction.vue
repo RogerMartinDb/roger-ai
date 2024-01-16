@@ -35,6 +35,9 @@ const init = () => {
     const data = JSON.parse(event.data)
     answer.value += data.response
   }
+  source.onerror = (event) => {
+    answer.value = event
+  }
   source.post(task)
 }
 
